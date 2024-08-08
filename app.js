@@ -1,11 +1,11 @@
 import 'dotenv/config';
 import express from 'express';
-import pool from './db.js';
+import BaseRepository from './repository/BaseRepository.js';
 
 const app = express();
 
-app.get('/', async (req, res) => {
-  const result = (await pool.query('SELECT * FROM users')).rows;
+app.get('/users', async (req, res) => {
+  const result = await (new BaseRepository().getAll('users'))
   res.status(200).send(result)
 })
 

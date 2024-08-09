@@ -15,11 +15,13 @@ class ProductRepository extends BaseRepository {
     }
   }
 
-  async getById(id) {
+  async getById(table, columnsArray, id) {
     try {
-      const result = await super.getById(
-        "products",
-        ["id", "name", "price_in_cents", "size"],
+      const result = await super.getById("products", [
+        "id", 
+        "name", 
+        "price_in_cents", 
+        "size"],
         id
       );
       return result;

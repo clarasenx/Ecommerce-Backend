@@ -10,7 +10,8 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
-  const result = await new UserRepository().getById("users", id);
+  const columnsArray = ["id", "name", "surname", "email"];
+  const result = await new UserRepository().getById("users", columnsArray, id);
   res.status(200).send(result);
 });
 

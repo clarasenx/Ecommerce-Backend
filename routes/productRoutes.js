@@ -10,7 +10,8 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
-  const result = await new ProductRepository().getById("products", id);
+  const columnsArray = ["id", "name", "price_in_cents", "size"];
+  const result = await new ProductRepository().getById("products", columnsArray, id);
   res.status(200).send(result);
 });
 

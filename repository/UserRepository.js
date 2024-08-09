@@ -15,7 +15,7 @@ class UserRepository extends BaseRepository {
     }
   }
 
-  async getById(id) {
+  async getById(table, columnsArray, id) {
     try {
       const result = await super.getById(
         "users",

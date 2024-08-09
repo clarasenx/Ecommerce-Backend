@@ -23,14 +23,24 @@ class BaseRepository {
   }
 
   async insertOne(table, columnsArray, valuesArray) {
+    const client = await pool.connect();
     try {
       let flagsString= '';
       for (let i = 1; i < columnsArray.length; i++) {
         flagsString += `$${i},`
       }
       flagsString += `$${columnsArray.length}`
+
+      const queryText = `INSERT INTO ${table} (${columnsArray.join()}) VALUES (${flagsString})`;
+
+      await client.query("BEGIN TRANSACTION");
+      await client.query(queryText, valuesArray);
+      await client.query('COMMIT');
     } catch (error) {
+      await client.query('ROLLBACK');
       throw error;
+    } finally {
+      client.release();
     }
   }
 }

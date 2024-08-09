@@ -28,6 +28,16 @@ class UserRepository extends BaseRepository {
       throw error;
     }
   }
+
+  async insertOne(valuesArray) {
+    try {
+      super.insertOne('users', ['name', 'surname', 'email'], valuesArray)
+    } catch (error) {
+      throw error;
+      
+    }
+
+  }
 }
 
 export default UserRepository;

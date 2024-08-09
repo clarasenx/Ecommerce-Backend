@@ -17,12 +17,11 @@ class UserRepository extends BaseRepository {
 
   async getById(id) {
     try {
-      const result = await super.getById("users",[
-        "id",
-        "name",
-        "size",
-        "price_in_cents",
-      ], id);
+      const result = await super.getById(
+        "users",
+        ["id", "name", "surname", "email"],
+        id
+      );
       return result;
     } catch (error) {
       throw error;
@@ -31,12 +30,10 @@ class UserRepository extends BaseRepository {
 
   async insertOne(valuesArray) {
     try {
-      super.insertOne('users', ['name', 'surname', 'email'], valuesArray)
+      super.insertOne("users", ["name", "surname", "email"], valuesArray);
     } catch (error) {
       throw error;
-      
     }
-
   }
 }
 
